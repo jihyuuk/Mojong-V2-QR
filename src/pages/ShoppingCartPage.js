@@ -8,8 +8,12 @@ import ShoppingCartList from "../components/ShoppingCartList";
 import ChangeAccordion from "../components/ChangeAccordion";
 import DiscountAccordion from "../components/DiscountAccordion";
 import OrderModal from "../components/modals/OrderModal";
+import { useNavigate } from "react-router-dom";
 
 function ShoppingCartPage() {
+
+    //라우트
+    const navigate = useNavigate();
 
     //토스트
     const { showTost } = useTost();
@@ -25,6 +29,14 @@ function ShoppingCartPage() {
         //모달 보여주기
         setShowModal(true);
     }
+
+    //장바구니가 비었을때 홈으로 리다이렉트
+    useEffect(()=>{
+        if(cartItems.length <= 0){
+            showTost("장바구니가 비어있습니다.");
+            navigate(-1);
+        }
+    },[]);
 
     return (
         <MotionPage> {/* 에니메이션 적용 */}
