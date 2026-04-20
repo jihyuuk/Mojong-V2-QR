@@ -5,11 +5,9 @@ import ShoppingCartPage from './pages/ShoppingCartPage';
 import { TostProvider } from './utils/TostProvider';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ShoppingCartProvider } from './utils/ShoppingCartProvider';
-import HistoryPage from './pages/staff/HistoryPage'
 import CashierOrderPage from './pages/CashierOrderPage';
 import SearchPage from './pages/SearchPage';
 import MainRoutes from './utils/routes/MainRotues';
-import HistoryDetailPage from './pages/staff/HistoryDetailPage';
 import { MenuProvider } from './utils/MenuProvider';
 import QRCheckGate from './utils/QRCheckGate';
 
@@ -36,12 +34,6 @@ function App() {
                     {/* 직원결제 페이지 */}
                     <Route path="/order" element={<CashierOrderPage />} />
                   </Route>
-
-                  {/* 주문 신청 기록 */}
-                  {/* <Route path="/history" element={<HistoryPage />}>
-                    <Route path=":id" element={<HistoryDetailPage />} />
-                  </Route> */}
-
 
                   {/* 이상한 경로 접근시 홈으로 리다이렉트 */}
                   <Route path="*" element={<Navigate to="/" replace />} />
