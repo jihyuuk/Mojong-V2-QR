@@ -42,13 +42,26 @@ function CashierOrderPage() {
                 //상태적용
                 setSaleId(response.data.saleId);
                 setOrderState("success");
-                //로컬 스토리지에 주문 내역 저장하는 메소드 추가해야함
             })
             .catch((error) => {
                 setOrderState("fail");
             });
 
     }, []);
+
+
+    const handleGoHome = () => {
+        // 사용자에게 확인 메시지 표시
+        const isConfirmed = window.confirm(
+            "주문 번호를 직원에게 보여주셨나요?"
+        );
+
+        if (isConfirmed) {
+            // '확인'을 눌렀을 때만 홈으로 이동 (기존 로직)
+            navigate(-2);
+        }
+        // '취소'를 누르면 아무 일도 일어나지 않고 현재 화면에 유지됩니다.
+    };
 
 
     return (
@@ -64,22 +77,45 @@ function CashierOrderPage() {
 
             {/* 성공 */}
             {orderState === "success" &&
-                <div className='d-flex flex-column h-100'>
+                <div className='d-flex flex-column h-100 bg-light'>
 
-                    {/* 로딩 서클 */}
-                    <div className="d-flex flex-column flex-grow-1 align-items-center justify-content-center">
-                        <div className="circle-loader load-complete">
+                    {/* 상단 섹션: 성공 아이콘 및 메시지 */}
+                    <div className="d-flex flex-column flex-grow-1 align-items-center justify-content-center px-4">
+
+                        {/* 로딩 완료 체크 아이콘 (기존 유지 혹은 크기 조절) */}
+                        <div className="circle-loader load-complete mb-4">
                             <div className="checkmark draw"></div>
                         </div>
-                        {/* 주문 성공 메시지 */}
-                        <div className="mt-3 fs-1 fw-semibold">주문 번호 : #{saleId}</div>
-                        <div className="mt-1">주문이 정상적으로 처리되었습니다.</div>
+
+                        <h2 className="fw-bold mb-2">주문 신청 완료!</h2>
+                        <p className="text-muted text-center">아래 주문 번호를 직원에게 보여주세요.</p>
+
+                        {/* 주문 번호 강조 카드 */}
+                        <div className="bg-white shadow-sm rounded-4 w-100 py-5 mt-4 d-flex flex-column align-items-center border border-primary">
+                            <span className="text-primary fw-bold mb-2">[ 주문 번호 ]</span>
+                            <div style={{ fontSize: '5rem', lineHeight: '1' }} className="fw-black text-dark">
+                                {saleId}
+                            </div>
+                        </div>
+
+                        {/* 안내 박스 */}
+                        <div className="mt-5 p-3 bg-white rounded-3 border w-100">
+                            <div className="d-flex align-items-center gap-2 text-secondary mb-2">
+                                <i className="bi bi-info-circle-fill"></i>
+                                <span className="fw-bold">결제 안내</span>
+                            </div>
+                            <ul className="small text-secondary mb-0 ps-3">
+                                <li>화면을 카운터 직원에게 보여주세요.</li>
+                                <li>직원이 확인 후 결제가 진행됩니다.</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <Footer value={"홈으로"} show={true} onClick={() => {
-                        //홈화면 이동
-                        navigate(-2);
-                    }}
+                    {/* 하단 버튼 */}
+                    <Footer
+                        value={"처음으로"}
+                        show={true}
+                        onClick={handleGoHome}
                     />
                 </div>
             }

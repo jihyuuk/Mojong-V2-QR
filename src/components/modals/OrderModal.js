@@ -48,7 +48,7 @@ function OrderModal({ showModal, setShowModal, finalAmount }) {
 
 
     return (
-        <Modal show={showModal} animation={false} className="mt-5">
+        <Modal show={showModal} animation={false} centered className="pb-5">
             <ModalHeader className='border-bottom border-success-subtle border-2'>
                 <ModalTitle className="d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-receipt-cutoff text-success" viewBox="0 0 16 16">
@@ -61,13 +61,13 @@ function OrderModal({ showModal, setShowModal, finalAmount }) {
 
             <ModalBody className='fs-4'>
 
-                <div className="text-secondary mb-3" style={{ fontSize: '1rem' }}>
+                {/* <div className="text-secondary mb-3" style={{ fontSize: '1rem' }}>
                     <span >품목 {cartItems.length}</span>
                     <span > · 총 수량 {totalQuantity}</span>
-                </div>
+                </div> */}
 
                 <div className="border px-2 py-3 rounded-3 bg-body-tertiary">
-                    <div className="mb-1">
+                    <div className="mb-3">
                         <div className="text-muted small mb-1">주문 항목</div>
                         <div className="fs-5 fw-bold ps-1">{getCartSummary()}</div>
                     </div>
@@ -81,8 +81,8 @@ function OrderModal({ showModal, setShowModal, finalAmount }) {
             </ModalBody>
 
             <div className='d-flex gap-1 p-2 border-top'>
-                <Button variant='secondary' className='fw-semibold py-2 text-nowrap px-5' onClick={() => setShowModal(false)} >취소</Button>
-                <Button variant='success' className='w-100 fw-semibold py-2' onClick={sumbit} >주문</Button>
+                <Button variant='secondary' className='fw-semibold py-2 text-nowrap px-5 fs-5' onClick={() => setShowModal(false)} >취소</Button>
+                <Button variant='success' className='w-100 fw-semibold py-2 fs-5' onClick={sumbit} >주문</Button>
             </div>
         </Modal>
     )
