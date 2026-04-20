@@ -4,24 +4,24 @@ import api from "./api";
 
 function QRCheckGate({ children }) {
 
-    const [isChecking, setIsChecking] = useState(true);
-    const [isAvailable, setIsAvailable] = useState(false);
+    const [isChecking, setIsChecking] = useState(false);
+    const [isAvailable, setIsAvailable] = useState(true);
     const [message, setMessage] = useState("");
 
-    useEffect(() => {
-        api.get("/guest/order-availability")
-            .then((res) => {
-                setIsAvailable(res.data.available);
-                setMessage(res.data.message ?? "");
-            })
-            .catch(() => {
-                setIsAvailable(false);
-                setMessage("현재 QR 주문을 이용할 수 없습니다.");
-            })
-            .finally(() => {
-                setIsChecking(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     api.get("/guest/order-availability")
+    //         .then((res) => {
+    //             setIsAvailable(res.data.available);
+    //             setMessage(res.data.message ?? "");
+    //         })
+    //         .catch(() => {
+    //             setIsAvailable(false);
+    //             setMessage("현재 QR 주문을 이용할 수 없습니다.");
+    //         })
+    //         .finally(() => {
+    //             setIsChecking(false);
+    //         });
+    // }, []);
 
     // 로딩중
     if (isChecking) {
