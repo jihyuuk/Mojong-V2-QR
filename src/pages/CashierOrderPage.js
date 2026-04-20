@@ -5,6 +5,7 @@ import axiosWithToken from "../utils/axiosWithToken";
 import { Button } from "react-bootstrap";
 import Footer from "../components/Footer";
 import { useMenu } from "../utils/MenuProvider";
+import api from "../utils/api";
 
 function CashierOrderPage() {
 
@@ -22,7 +23,6 @@ function CashierOrderPage() {
     //주문상태
     const [orderState, setOrderState] = useState("loading");
     const [saleId, setSaleId] = useState(-1);
-    const [printOK, setPrintOK] = useState(true);
 
     //주문 로직
     useEffect(() => {
@@ -34,15 +34,15 @@ function CashierOrderPage() {
         }
 
         //서버로 전송
-        axiosWithToken.post("/order", orderData)
+        api.post("/guest/order", orderData)
             .then((response) => {
                 //장바구니, 메뉴 초기화
                 setCartItems([]);
                 fetchMenu();
                 //상태적용
                 setSaleId(response.data.saleId);
-                setPrintOK(response.data.printOK);
                 setOrderState("success");
+                //로컬 스토리지에 주문 내역 저장하는 메소드 추가해야함
             })
             .catch((error) => {
                 setOrderState("fail");
@@ -74,13 +74,6 @@ function CashierOrderPage() {
                         {/* 주문 성공 메시지 */}
                         <div className="mt-3 fs-1 fw-semibold">주문 번호 : #{saleId}</div>
                         <div className="mt-1">주문이 정상적으로 처리되었습니다.</div>
-
-                        {/* 영수증 출력 실패 */}
-                        {!orderData.skipReceipt && !printOK &&
-                            <div className="mt-5 fs-4 fw-semibold text-danger">
-                                영수증 출력 실패!
-                            </div>
-                        }
                     </div>
 
                     <Footer value={"홈으로"} show={true} onClick={() => {
@@ -102,7 +95,8 @@ function CashierOrderPage() {
                         </div>
                         {/* 주문 실패 메시지 */}
                         <div className="mt-3 fs-1 fw-semibold text-danger">주문 실패!</div>
-                        <div className="mt-1">주문 처리에 실패했습니다. 관리자에게 문의하세요.</div>
+                        <div className="mt-4">주문 처리에 실패했습니다</div>
+                        <div className="mt-1">관리자에게 문의하세요.</div>
                     </div>
 
                     <footer className="p-2 pb-3 border-top">

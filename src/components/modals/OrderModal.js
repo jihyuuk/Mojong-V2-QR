@@ -4,23 +4,12 @@ import { useShoppingCart } from "../../utils/ShoppingCartProvider";
 import { useNavigate } from "react-router-dom";
 
 
-function OrderModal({ showModal, setShowModal, finalAmount, payment, discountAmount }) {
+function OrderModal({ showModal, setShowModal, finalAmount }) {
 
     const { cartItems, totalPrice, totalQuantity } = useShoppingCart();
 
     const navigate = useNavigate();
 
-    // 1. 출력 모드 상태 변경 (ALL: 전체, RECEIPT: 영수증만, NONE: 모두생략)
-    //  초기 상태를 localStorage에서 가져오기 (없으면 'RECEIPT'가 기본값)
-    const [printMode, setPrintMode] = useState(() => {
-        return localStorage.getItem("lastPrintMode") || "RECEIPT";
-    });
-
-    // 2. 출력 모드가 바뀔 때마다 localStorage에 저장하기
-    const handlePrintModeChange = (mode) => {
-        setPrintMode(mode);
-        localStorage.setItem("lastPrintMode", mode);
-    };
 
     //주문항목 만드는 함수
     const getCartSummary = () => {
@@ -48,11 +37,7 @@ function OrderModal({ showModal, setShowModal, finalAmount, payment, discountAmo
                 totalAmount: (item.price * item.quantity),
             })),
             totalAmount: totalPrice,
-            discountAmount: discountAmount,
             finalAmount: finalAmount,
-            payment: payment,
-            skipReceipt: printMode === 'NONE',
-            skipExchangeReceipt: printMode !== 'ALL'
         }
 
         // 주문 페이지로 이동
@@ -87,55 +72,9 @@ function OrderModal({ showModal, setShowModal, finalAmount, payment, discountAmo
                         <div className="fs-5 fw-bold ps-1">{getCartSummary()}</div>
                     </div>
 
-                    <div className="mb-3">
-                        <div className="text-muted small mb-1">결제 방식</div>
-                        <div className="ps-1 fw-semibold fs-5">{payment === "CASH" ? "현금 결제 💵" : "카드 결제 💳"}</div>
-                    </div>
-
-
-                    {discountAmount > 0 &&
-                        <div className="mb-3">
-                            <div className="text-muted small mb-1">할인 금액</div>
-                            <div className="ps-1 fs-4 fw-semibold text-danger">-{discountAmount.toLocaleString()}원</div>
-                        </div>
-                    }
-
                     <div className="">
                         <div className="text-muted small mb-1">최종 결제 금액</div>
                         <div className="ps-1 fs-4 fw-semibold text-success">{finalAmount.toLocaleString()}원</div>
-                    </div>
-                </div>
-
-                {/* 3. 출력 옵션 영역 수정 */}
-                <div className="p-3 border rounded-3 bg-white mt-3">
-                    <div className="d-flex flex-column gap-2 text-muted">
-                        <Form.Check
-                            type="radio"
-                            id="print-receipt"
-                            name="printOption"
-                            label="영수증"
-                            checked={printMode === 'RECEIPT'}
-                            onChange={() => handlePrintModeChange('RECEIPT')}
-                            className={printMode === 'RECEIPT' ? "fw-bold text-success" : ""}
-                        />
-                        <Form.Check
-                            type="radio"
-                            id="print-all"
-                            name="printOption"
-                            label="영수증 + 교환권"
-                            checked={printMode === 'ALL'}
-                            onChange={() => handlePrintModeChange('ALL')}
-                            className={printMode === 'ALL' ? "fw-bold text-success" : ""}
-                        />
-                        <Form.Check
-                            type="radio"
-                            id="print-none"
-                            name="printOption"
-                            label="모두 생략"
-                            checked={printMode === 'NONE'}
-                            onChange={() => handlePrintModeChange('NONE')}
-                            className={printMode === 'NONE' ? "fw-bold text-danger" : ""}
-                        />
                     </div>
                 </div>
 

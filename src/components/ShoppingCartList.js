@@ -112,11 +112,10 @@ function ShoppingCartList() {
 
             {/* 추가하기 버튼 */}
             <div className='p-2 text-center'>
-                <Link to="/custom-item">
-                    <span className="px-3 py-2 fs-5 text-secondary">
-                        + 직접입력
-                    </span>
-                </Link>
+                {/* 여기 navigate(-1)로 수정 */}
+                <span onClick={() => navigate(-1)} className="px-3 py-2 fs-5 text-secondary">
+                    + 더 담기
+                </span>
             </div>
 
         </div>

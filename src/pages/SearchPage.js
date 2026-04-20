@@ -202,6 +202,13 @@ function SearchPage() {
 
                         <div className='flex-grow-1 overflow-y-auto bg-body-secondary border-top'>
 
+                            {/* 결과없을때 */}
+                            {searchResults.length === 0 &&
+                                <div className="text-secondary text-center mt-5" >
+                                    🔍 검색 결과가 없어요
+                                </div>
+                            }
+
                             {/* 검색결과 리스트*/}
                             <div className='bg-white shadow-sm'>
                                 {searchResults.map(item => <ItemList key={item.id} item={item} replace={true} parentOnClick={saveHistory} />)}
