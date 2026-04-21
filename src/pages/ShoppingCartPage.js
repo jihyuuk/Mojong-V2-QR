@@ -54,7 +54,7 @@ function ShoppingCartPage() {
                     </div>
 
                     {/* 합계 */}
-                    <div className="mt-3 bg-white p-3">
+                    <div className="mt-3 mb-4 bg-white p-3">
                         <div className="pb-3 fs-4 fw-semibold">합계</div>
                         <div className="border border-success-subtle rounded-3 p-3">
                             <div className=" d-flex justify-content-between fs-5 fw-medium fw-semibold ">

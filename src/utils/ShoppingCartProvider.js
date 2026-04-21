@@ -36,10 +36,7 @@ export function ShoppingCartProvider({ children }) {
             if (menuItem) {
                 //메뉴에 있으면 수량만 적용 <= 그래야 업데이트된 가격,설명 적용가능
                 return { ...menuItem, quantity: item.quantity }
-            } else {
-                // 메뉴에 없으면(커스텀 아이템) 그대로 사용
-                return item;
-            }
+            } 
 
         });
 
