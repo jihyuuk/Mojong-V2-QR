@@ -22,7 +22,7 @@ function CashierOrderPage() {
 
     //주문상태
     const [orderState, setOrderState] = useState("loading");
-    const [saleId, setSaleId] = useState(-1);
+    const [qrOrderId, setQrOrderId] = useState(0);
 
     //주문 로직
     useEffect(() => {
@@ -40,7 +40,7 @@ function CashierOrderPage() {
                 setCartItems([]);
                 fetchMenu();
                 //상태적용
-                setSaleId(response.data.saleId);
+                setQrOrderId(response.data.qrOrderId);
                 setOrderState("success");
             })
             .catch((error) => {
@@ -80,11 +80,13 @@ function CashierOrderPage() {
                 <div className='d-flex flex-column h-100 bg-light'>
 
                     {/* 상단 섹션: 성공 아이콘 및 메시지 */}
-                    <div className="d-flex flex-column flex-grow-1 align-items-center justify-content-center px-4">
+                    <div className="d-flex flex-column overflow-y-auto flex-grow-1 align-items-center justify-content-center p-4">
 
                         {/* 로딩 완료 체크 아이콘 (기존 유지 혹은 크기 조절) */}
-                        <div className="circle-loader load-complete mb-4">
-                            <div className="checkmark draw"></div>
+                        <div className="d-flex justify-content-center w-100 flex-shrink-0 mb-4">
+                            <div className="circle-loader load-complete">
+                                <div className="checkmark draw"></div>
+                            </div>
                         </div>
 
                         <h2 className="fw-bold mb-2">주문 신청 완료!</h2>
@@ -94,7 +96,7 @@ function CashierOrderPage() {
                         <div className="bg-white shadow-sm rounded-4 w-100 py-5 mt-4 d-flex flex-column align-items-center border border-primary">
                             <span className="text-primary fw-bold mb-2">[ 주문 번호 ]</span>
                             <div style={{ fontSize: '5rem', lineHeight: '1' }} className="fw-black text-dark">
-                                {saleId}
+                                {String(qrOrderId).padStart(3, '0')}
                             </div>
                         </div>
 
