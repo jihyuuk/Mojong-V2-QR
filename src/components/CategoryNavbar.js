@@ -14,23 +14,6 @@ function CategoryNavbar({ contentRef, sectionRefs }) {
     const categoryRefs = useRef({});
     const stopScrollEvent = useRef(false);
 
-    //메뉴 2줄로 나누기=============================================================================
-    const totalLength = menu.reduce((sum, cat) => sum + cat.name.length, 0);
-    const targetLength = totalLength / 2;
-
-    const row1 = [];
-    const row2 = [];
-
-    let currentLength = 0;
-
-    menu.forEach((category) => {
-        if (currentLength <= targetLength) {
-            row1.push(category);
-            currentLength += category.name.length;
-        } else {
-            row2.push(category);
-        }
-    });
     //============================================================================================
 
     //카테고리 클릭시 (카테고리 id)
@@ -152,7 +135,7 @@ function CategoryNavbar({ contentRef, sectionRefs }) {
         <div className="overflow-x-auto pb-1 border-bottom" style={{scrollPaddingInline:"1rem"}}>
 
             <Stack direction="horizontal" gap={3} className='px-2 text-nowrap'>
-                {row1.map((category) => {
+                {menu.map((category) => {
                     return (
                         <div
                             id={category.categoryId}
@@ -167,23 +150,7 @@ function CategoryNavbar({ contentRef, sectionRefs }) {
                 })}
                 <div className="p-1" />
             </Stack>
-
-            <Stack direction="horizontal" gap={3} className='px-2 text-nowrap'>
-                {row2.map((category) => {
-                    return (
-                        <div
-                            id={category.categoryId}
-                            key={category.name}
-                            className={`myCategory ${category.categoryId === activeCat ? 'active' : ''}`}
-                            onClick={() => onCatClick(category.categoryId)}
-                            ref={(el) => (categoryRefs.current[category.categoryId] = el)}
-                        >
-                            {category.name}
-                        </div>
-                    );
-                })}
-                <div className="p-1"></div>
-            </Stack>
+            
         </div>
     )
 }
