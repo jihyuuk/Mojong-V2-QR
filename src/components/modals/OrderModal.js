@@ -78,6 +78,18 @@ function OrderModal({ showModal, setShowModal, finalAmount }) {
                     </div>
                 </div>
 
+                <div className="mt-3 p-3 rounded-3 bg-warning bg-opacity-10 border border-warning border-opacity-25">
+                    <div className="d-flex gap-2 align-items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-exclamation-circle-fill text-warning mt-1" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                        </svg>
+                        <div className="text-secondary" style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>
+                            <strong className="text-dark">안내드립니다</strong><br />
+                            최종 결제는 현장에서 직원을 통해 진행됩니다. 모종의 상태나 재고 상황에 따라서 가격 변동이 발생할 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+
             </ModalBody>
 
             <div className='d-flex gap-1 p-2 border-top'>
