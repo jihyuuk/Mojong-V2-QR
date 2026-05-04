@@ -116,13 +116,13 @@ function DetailPage() {
         //애니메이션 적용 취소
         //<MotionPage>
         <div className='z-2 position-absolute top-0 start-0 w-100 h-100 bg-white'>
-            <div className='d-flex flex-column h-100 bg-white'>
+            <div className='d-flex flex-column h-100 bg-white overflow-y-auto'>
 
                 {/* 헤더 */}
                 <SubHeader title={item.name} />
 
                 {/* 상품 정보*/}
-                <div className='px-3 hide-on-short-screen-650'>
+                <div className='px-3 hide-on-short-screen-540'>
                     <div className='d-flex  w-100 mt-1'>
                         {/* 이름, 설명, 단가 */}
                         <div className='flex-grow-1 pe-2'>
@@ -153,7 +153,7 @@ function DetailPage() {
 
                 {/* 넘버패드 */}
                 <div className='mt-auto'>
-                    <div className="hide-on-short-screen-560">
+                    <div className="hide-on-short-screen-650">
                         <div className='d-flex gap-2 text-center fw-semibold text-success px-2 mb-1'>
                             {plusValue.map((value, index) =>
                                 <div
@@ -181,7 +181,7 @@ function DetailPage() {
                             {row.map((number, colIdx) =>
                                 <div
                                     key={"num" + colIdx}
-                                    className='w-100 py-3 rounded-4 mb-1'
+                                    className='w-100 py-2 rounded-4 mb-1'
                                     onClick={() => keyClicked(number)}
                                     onTouchStart={(e) => e.currentTarget.classList.add('bg-secondary-subtle', 'text-secondary')}
                                     onTouchEnd={(e) => e.currentTarget.classList.remove('bg-secondary-subtle', 'text-secondary')}

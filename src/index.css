@@ -51,3 +51,10 @@ table tbody tr:last-child td {
     display: none !important;
   }
 }
+
+/* 화면 높이가 540px 이하로 줄어들면 상품 정보 영역을 숨김 */
+@media (max-height: 540px) {
+  .hide-on-short-screen-540 {
+    display: none !important;
+  }
+}
