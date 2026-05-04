@@ -122,7 +122,7 @@ function DetailPage() {
                 <SubHeader title={item.name} />
 
                 {/* 상품 정보*/}
-                <div className='px-3'>
+                <div className='px-3 hide-on-short-screen-650'>
                     <div className='d-flex  w-100 mt-1'>
                         {/* 이름, 설명, 단가 */}
                         <div className='flex-grow-1 pe-2'>
@@ -144,7 +144,7 @@ function DetailPage() {
                 </div>
 
                 {/* 수량 */}
-                <div className='flex-grow-1 overflow-y-auto'>
+                <div className='flex-grow-1 overflow-y-auto' style={{ minHeight: '120px' }}>
                     <div className='d-flex flex-column justify-content-center align-items-center h-100'>
                         <div className='display-3 fw-semibold text-success'>{quantity.toLocaleString('ko-KR')}개</div>
                         <div className='mt-3 fw-medium text-secondary fs-5'>합계 {total.toLocaleString('ko-KR')}원</div>
@@ -153,25 +153,28 @@ function DetailPage() {
 
                 {/* 넘버패드 */}
                 <div className='mt-auto'>
-                    <div className='d-flex gap-2 text-center fw-semibold text-success px-2 mb-1'>
-                        {plusValue.map((value, index) =>
-                            <div
-                                key={index}
-                                onClick={() => plusButtonClick(value)}
-                                className='w-100 rounded-3 py-2 bg-success-subtle'
-                                onTouchStart={(e) => {
-                                    e.currentTarget.classList.remove('bg-success-subtle');
-                                    e.currentTarget.classList.add('bg-secondary-subtle', 'text-secondary');
-                                }}
-                                onTouchEnd={(e) => {
-                                    e.currentTarget.classList.remove('bg-secondary-subtle', 'text-secondary');
-                                    e.currentTarget.classList.add('bg-success-subtle');
-                                }}
-                            >
-                                +{value}
-                            </div>
-                        )}
+                    <div className="hide-on-short-screen-560">
+                        <div className='d-flex gap-2 text-center fw-semibold text-success px-2 mb-1'>
+                            {plusValue.map((value, index) =>
+                                <div
+                                    key={index}
+                                    onClick={() => plusButtonClick(value)}
+                                    className='w-100 rounded-3 py-2 bg-success-subtle'
+                                    onTouchStart={(e) => {
+                                        e.currentTarget.classList.remove('bg-success-subtle');
+                                        e.currentTarget.classList.add('bg-secondary-subtle', 'text-secondary');
+                                    }}
+                                    onTouchEnd={(e) => {
+                                        e.currentTarget.classList.remove('bg-secondary-subtle', 'text-secondary');
+                                        e.currentTarget.classList.add('bg-success-subtle');
+                                    }}
+                                >
+                                    +{value}
+                                </div>
+                            )}
+                        </div>
                     </div>
+
 
                     {numberPad.map((row, rowIdx) =>
                         <div key={"row" + rowIdx} className='d-flex text-center fw-semibold fs-4'>

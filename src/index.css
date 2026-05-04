@@ -37,3 +37,17 @@ html,body, #root {
 table tbody tr:last-child td {
   border-bottom: none !important;
 }
+
+/* 화면 높이가 650px 이하로 줄어들면 상품 정보 영역을 숨김 */
+@media (max-height: 650px) {
+  .hide-on-short-screen-650 {
+    display: none !important;
+  }
+}
+
+/* 화면 높이가 560px 이하로 줄어들면 상품 정보 영역을 숨김 */
+@media (max-height: 560px) {
+  .hide-on-short-screen-560 {
+    display: none !important;
+  }
+}
